@@ -1,0 +1,8 @@
+<template>
+  <div>
+    <p>second lol</p>
+    <SocialFormHead />
+    <SocialFormBody />
+    <SocialBtns @next="(offset) => $emit('next', offset)" />
+  </div>
+</template>

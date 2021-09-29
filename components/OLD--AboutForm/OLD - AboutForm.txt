@@ -1,0 +1,7 @@
+<template>
+  <div>
+    <AboutFormHead />
+    <AboutFormBody />
+    <AboutBtns @next="(offset) => $emit('next', offset)" />
+  </div>
+</template>

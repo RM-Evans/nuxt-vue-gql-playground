@@ -1,0 +1,5 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "vue/no-multiple-template-root": false
+}

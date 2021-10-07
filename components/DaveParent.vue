@@ -33,6 +33,12 @@ export default {
       Object.assign(this.parentForm, formData)
       this.step++
     },
+    //!test watcher on BACK --- so I submit data on "back" as well
+    // onCompleteGoBack(formData) {
+    //   console.log('Parent got it GO BACK', formData)
+    //   Object.assign(this.parentForm, formData)
+    //   this.step--
+    // },
   },
 }
 </script>

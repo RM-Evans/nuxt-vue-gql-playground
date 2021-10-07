@@ -62,9 +62,10 @@ main should be completed to go to next step
     <!-- //TODO: work out a good way to pass each form to parent 
     also, try pushing each form to an array and display it to the page in json
     -->
-    <input class="testInput" v-model="model.platform" />
-    <input class="testInput" v-model="model.username" />
-    <input class="testInput" v-model="model.followers" />
+    <input class="testInput" v-model="model.social.platform" />
+    <input class="testInput" v-model="model.social.username" />
+    <input class="testInput" v-model="model.social.followers" />
+
     <button
       @click="sendData"
       style="color: green; font-weight: bold; border: green 2px solid"
@@ -130,15 +131,18 @@ export default {
     Icon,
   },
   props: {
-    formData: Object,
+    formData: Array,
   },
   data() {
     return {
       model: {
-        platform: '',
-        username: '',
-        followers: null,
+        social: {
+          platform: '',
+          username: '',
+          followers: null,
+        },
       },
+      // socialArray: [],  //! I should handle this on parent?
       icons: {
         addCircle24Filled,
       },
@@ -150,19 +154,29 @@ export default {
     showExtraFields() {
       this.toggleExtraFields = !this.toggleExtraFields
     },
-    //!!!formData doesnt exist. im expecting it to be all the data ive collected in form.vue???? am passing formData Object as a prop, above
-    sendData() {
-      const { formData } = this
-      //! formData is UNDEFINED
-      console.log({ formData })
 
-      this.$emit('formSubmitted', this.model)
+    sendData() {
+      //*testing purposes
+      this.$emit('socialSubmit', this.model.social)
     },
+
     sendDataAndProceed() {
-      //TODO send data to form.vue then go to next step
-      // this.$emit('formSubmitted', this.model)
+      //TODO want to send
+      this.$emit('socialSubmit', this.model.social)
       this.$emit('next', 1)
     },
+
+    //!!!formData doesnt exist here. im expecting it to be all the data ive collected in form.vue???? am passing formData Object as a prop, above
+    // pushToArray() {
+    //   //* collect form state, push to array, update form.vue
+
+    //   let socialFormData = {
+    //     platform: this.model.social.platform,
+    //     username: this.model.social.username,
+    //     followers: this.model.social.followers,
+    //   }
+    //   this.socialArray.push(socialFormData)
+    // },
   },
 }
 </script>

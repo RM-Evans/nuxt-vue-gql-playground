@@ -17,6 +17,7 @@ export default {
     parentForm: Object,
   },
   watch: {
+    //am using this in order to remember state in case I need to go back to this step --  so I can go back and change if I made a mistake
     parentForm: {
       deep: true, // hes a big old object with nested objects / arrays
       immediate: true, // do it when we first load
@@ -35,6 +36,7 @@ export default {
   },
   data() {
     return {
+      //refer to v-models on elements
       radioOption: null,
       textValue: '',
     }
@@ -44,7 +46,8 @@ export default {
       const { radioOption, textValue } = this
       const payload = { radioOption, textValue }
       console.log('child has', payload)
-      this.$emit('formData', payload)
+      //am telling parent that this child has the user input and what it is
+      this.$emit('formData', payload) //@formData="onComplete"  on DaveParent.vue is where I see this
     },
   },
 }

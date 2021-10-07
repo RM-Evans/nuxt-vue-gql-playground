@@ -11,7 +11,7 @@
     <div class="questionAlign">
       <div class="question">
         <h2>How much time do you plan on committing to Everra?</h2>
-        <v-radio-group v-model="timeCommitmentResponse">
+        <v-radio-group v-model="model.timeCommitmentResponse">
           <v-radio label="Full-time (30+ hours weekly)" color="#c44a42" />
           <v-radio
             label="Part-time (less than 30 hours weekly)"
@@ -21,7 +21,7 @@
 
         <div class="question">
           <h2>I want to make this a ___.</h2>
-          <v-radio-group v-model="wantToMakeThisResponse">
+          <v-radio-group v-model="model.wantToMakeThisResponse">
             <v-radio label="Career" color="#c44a42" />
             <v-radio label="Hobby" color="#c44a42" />
           </v-radio-group>
@@ -29,7 +29,7 @@
 
         <div class="question">
           <h2>How can we help you succeed in Everra?</h2>
-          <v-radio-group v-model="howToSucceedResponse">
+          <v-radio-group v-model="model.howToSucceedResponse">
             <v-radio label="Dashboard Tools" color="#c44a42" />
             <v-radio label="Community Guidance" color="#c44a42" />
             <v-radio label="Social Media Guidance" color="#c44a42" />
@@ -39,13 +39,11 @@
     </div>
 
     <button
-      @click="sendRadioData"
+      @click="sendSurveyData"
       style="color: green; font-weight: bold; border: green 2px solid"
     >
       SEND RADIO DATA TO PARENT
     </button>
-
-    {{ filledRadioArray }}
 
     <!-- nav buttons -->
 
@@ -55,7 +53,7 @@
         <p>back</p>
       </button>
       <!-- next button -->
-      <button class="apply-btn-on-survey" @click="sendDataAndApply">
+      <button class="apply-btn-on-survey" @click="sendSurveyDataAndApply">
         <p>apply</p>
       </button>
     </div>
@@ -66,7 +64,7 @@
 export default {
   data() {
     return {
-      radioModel: {
+      model: {
         timeCommitmentResponse: '',
         wantToMakeThisResponse: '',
         howToSucceedResponse: '',
@@ -78,27 +76,27 @@ export default {
     formData: Object,
   },
   methods: {
-    sendRadioData() {
-      let filledRadioModel = {
-        timeCommitmentResponse: this.timeCommitmentResponse,
-        wantToMakeThisResponse: this.wantToMakeThisResponse,
-        howToSucceedResponse: this.howToSucceedResponse,
-      }
+    sendSurveyData() {
+      // let filledRadioModel = {
+      //   timeCommitmentResponse: this.timeCommitmentResponse,
+      //   wantToMakeThisResponse: this.wantToMakeThisResponse,
+      //   howToSucceedResponse: this.howToSucceedResponse,
+      // }
 
-      this.$emit('filledForm', filledRadioModel)
+      this.$emit('submitSurvey', this.model)
 
       //   this.filledRadioArray.push(filledRadioModel)
     },
-    // sendDataAndApply() {
-    //   const { formData } = this
-    //   console.log({ formData })
-    //   //send radio data to form.vue
-    //   this.$emit('filledForm', this.filledRadioModel)
-    //   //TODO get all data from form.vue and SEND
-    //   this.$emit('formSubmitted', this.radioModel)
-    //   //go to next page
-    //   this.$emit('next', 1)
-    // },
+    sendSurveyDataAndApply() {
+      const { formData } = this
+      console.log({ formData })
+      //send radio data to form.vue
+      this.$emit('submitSurvey', this.model)
+      // //TODO get all data from form.vue and SEND
+      // this.$emit('formSubmitted', this.model)
+      //go to next page
+      this.$emit('next', 1)
+    },
   },
 }
 </script>

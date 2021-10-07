@@ -12,23 +12,23 @@
       <!-- first name -->
       <div class="form-fields-container">
         <label>First name</label>
-        <input v-model="about.firstName" class="about-input" />
+        <input v-model="model.firstName" class="about-input" />
       </div>
       <!-- last name -->
       <div class="form-fields-container">
         <label>Last name</label>
-        <input v-model="about.lastName" class="about-input" />
+        <input v-model="model.lastName" class="about-input" />
       </div>
       <!-- email -->
       <div class="form-fields-container">
         <label>Email</label>
-        <input v-model="about.email" class="about-input" />
+        <input v-model="model.email" class="about-input" />
       </div>
-      <!-- phone number -->
-      <div class="form-fields-container">
+      <!--//! phone number -->
+      <!-- <div class="form-fields-container">
         <label>Phone number</label>
-        <input v-model="about.phoneNumber" class="about-input" />
-      </div>
+        <input v-model="model.phoneNumber" class="about-input" />
+      </div> -->
       <!-- country of residence -->
 
       <!-- //TODO figure out iconify with nuxt (dropdown arrow)
@@ -39,7 +39,7 @@
       <div class="form-fields-container">
         <label>Country of residence</label>
         <select
-          v-model="about.residentCountry"
+          v-model="model.residentCountry"
           class="about-input"
           id="tempSelectARROW"
         >
@@ -54,7 +54,7 @@
     <!-- nav buttons -->
 
     <div class="about-btn-container">
-      <button class="next-btn" @click="() => $emit('next', 1)">
+      <button class="next-btn" @click="sendDataAndProceed">
         <p>next</p>
       </button>
     </div>
@@ -66,14 +66,23 @@
 export default {
   data() {
     return {
-      about: {
+      model: {
         firstName: '',
-      },
-      form: {
-        title: '',
-        radioValue: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
       },
     }
+  },
+  props: {
+    formData: Object,
+  },
+  methods: {
+    sendDataAndProceed() {
+      //TODO send data to form.vue then go to next step
+      this.$emit('aboutSubmit', this.model)
+      this.$emit('next', 1)
+    },
   },
 }
 </script>
